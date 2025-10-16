@@ -27,8 +27,10 @@
       "@services/*": ["./services/*"],
       "@atoms/*": ["./atoms/*"],
       "@icons/*": ["./assets/icons/*"],
+      "@store": ["./store"],
       "@hooks/*": ["./hooks/*"],
-      "@constants/*": ["./constants/*"]
+      "@constants/*": ["./constants/*"],
+      "@reducers/*": ["./reducers/*"]
     },
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "forceConsistentCasingInFileNames": true
