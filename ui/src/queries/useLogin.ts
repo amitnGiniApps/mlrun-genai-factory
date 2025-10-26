@@ -39,7 +39,7 @@ export function useLogin() {
       storeLogin(username, password, admin);
 
       const res = await Client.getUser(username);
-      const { data, error, success } = res?.data ?? {};
+      const { data, error, success } = res;
 
       if (!success) {
         throw new Error(error || 'Login failed');

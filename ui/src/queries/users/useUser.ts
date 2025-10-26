@@ -22,7 +22,7 @@ export function useUser(username?: string, enabled = true) {
     queryFn: async () => {
       if (!username) return null;
       const res = await Client.getUser(username);
-      const { data, error, success } = res?.data ?? {};
+      const { data, error, success } = res;
       if (!success) throw new Error(error || 'Failed to fetch user');
       return data ?? null;
     },
