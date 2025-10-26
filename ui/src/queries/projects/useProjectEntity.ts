@@ -34,7 +34,6 @@ export function useProjectEntity<T>(
   const { name: projectName } = useParams();
   const { data: project } = useProject(projectName); // note: uses default project hook (no param)
 
-  // Fetch
   const query = useQuery<T[]>({
     queryKey: [key, projectName],
     queryFn: async () => {
@@ -46,13 +45,11 @@ export function useProjectEntity<T>(
     staleTime: 5 * 60 * 1000,
   });
 
-  // invalidate helper
   const invalidate = useCallback(
     () => queryClient.invalidateQueries({ queryKey: [key, projectName] }),
     [queryClient, key, projectName],
   );
 
-  // Mutations with defensive checks
   const create = useMutation({
     mutationFn: async (entity: T) => {
       console.log({ entity, projectName });
