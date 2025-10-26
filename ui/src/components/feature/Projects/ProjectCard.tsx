@@ -33,8 +33,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       ? project.labels
       : project.labels
         ? Object.entries(project.labels)
-          .map(([k, v]) => `${k}: ${v}`)
-          .join(', ')
+            .map(([k, v]) => `${k}: ${v}`)
+            .join(', ')
         : 'No labels';
 
   return (

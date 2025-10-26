@@ -29,7 +29,7 @@ import Layout from '@components/feature/Layout';
 import AddEditProjectModal from '@components/feature/Projects/AddEditProjectModal';
 import ProjectCard from '@components/feature/Projects/ProjectCard';
 import Loading from '@components/shared/Loading';
-import { useProjectActions,useProjects } from '@queries';
+import { useProjectActions, useProjects } from '@queries';
 import { Project } from '@shared/types/project';
 
 export const ProjectsPage = () => {
@@ -38,10 +38,7 @@ export const ProjectsPage = () => {
 
   const toast = useToast();
 
-  const {
-    data: projects,
-    isLoading
-  } = useProjects();
+  const { data: projects, isLoading } = useProjects();
 
   const {
     isOpen: isModalOpen,

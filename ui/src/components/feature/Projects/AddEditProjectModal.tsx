@@ -61,10 +61,9 @@ const AddEditProjectModal: React.FC<ProjectModalProps> = ({
   useEffect(() => {
     if (!project && publicUser) {
       const uid = publicUser.uid;
-      if(uid) {
+      if (uid) {
         setFormData((prev) => ({ ...prev, owner_id: uid }));
       }
-
     }
   }, [publicUser, project]);
 

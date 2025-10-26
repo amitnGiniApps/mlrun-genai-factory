@@ -26,7 +26,7 @@ export const useProjectActions = () => {
 
   const validateApiResponse = async (
     apiCall: Promise<APIResponse>,
-    action: string
+    action: string,
   ) => {
     const response = await apiCall;
     if (!response.success) {
@@ -39,19 +39,28 @@ export const useProjectActions = () => {
 
   const createProject = useMutation({
     mutationFn: (project: Project) =>
-      validateApiResponse(Client.createProject(project), `create (${project.name})`),
+      validateApiResponse(
+        Client.createProject(project),
+        `create (${project.name})`,
+      ),
     onSuccess: invalidateProjects,
   });
 
   const updateProject = useMutation({
     mutationFn: (project: Project) =>
-      validateApiResponse(Client.updateProject(project), `update (${project.name})`),
+      validateApiResponse(
+        Client.updateProject(project),
+        `update (${project.name})`,
+      ),
     onSuccess: invalidateProjects,
   });
 
   const deleteProject = useMutation({
     mutationFn: (projectId: string) =>
-      validateApiResponse(Client.deleteProject(projectId), `delete (ID: ${projectId})`),
+      validateApiResponse(
+        Client.deleteProject(projectId),
+        `delete (ID: ${projectId})`,
+      ),
     onSuccess: invalidateProjects,
   });
 
