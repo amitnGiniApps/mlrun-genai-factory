@@ -35,6 +35,7 @@ export function useLogin() {
       password: string;
       admin: boolean;
     }) => {
+      // TODO: Replace with real authentication — currently uses mock data and ignores password
       storeLogin(username, password, admin);
 
       const res = await Client.getUser(username);

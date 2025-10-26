@@ -32,6 +32,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
 
+      // TODO: Replace mock login with real authentication and token generation
       login: (username, _password, admin) => {
         const token = 'dummyToken';
         const newUser = { username, admin, token };
