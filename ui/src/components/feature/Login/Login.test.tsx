@@ -42,9 +42,9 @@ const renderWithProviders = (ui: React.ReactElement) => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ChakraProvider theme={theme}>{ui}</ChakraProvider>
-      </BrowserRouter>,
-    </QueryClientProvider>
-
+      </BrowserRouter>
+      ,
+    </QueryClientProvider>,
   );
 };
 

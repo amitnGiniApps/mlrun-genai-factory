@@ -27,9 +27,9 @@ const renderWithProviders = (ui: React.ReactElement) => {
 
   const Wrapper: React.FC<React.PropsWithChildren<object>> = ({ children }) => (
     <QueryClientProvider client={queryClient}>
-        <Router>
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
-        </Router>
+      <Router>
+        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+      </Router>
     </QueryClientProvider>
   );
 
@@ -67,7 +67,6 @@ describe('Topbar Component (Zustand)', () => {
     expect(screen.getByTestId('logo')).toBeInTheDocument();
     expect(screen.getByTestId('avatar')).toBeInTheDocument();
   });
-
 
   it('opens Rightbar when avatar is clicked', () => {
     renderWithProviders(<Topbar onLoginChange={mockOnLoginChange} />);
