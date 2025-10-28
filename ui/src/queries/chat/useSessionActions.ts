@@ -13,9 +13,10 @@
 // limitations under the License.
 
 import Client from '@services/Api';
-import { APIResponse } from '@shared/types';
 import { Session } from '@shared/types/session';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { validateApiResponse } from '@utils/validateApiResponse';
 
 export function useSessionActions(username?: string) {
   const queryClient = useQueryClient();
@@ -26,37 +27,39 @@ export function useSessionActions(username?: string) {
     }
   };
 
-  const validateApiResponse = async (apiCall: Promise<APIResponse>) => {
-    const response = await apiCall;
-    if (!response.success) {
-      throw new Error(response.error || 'API request failed');
-    }
-    return response.data;
+  const ensureUsername = (action: string) => {
+    if (!username) throw new Error(`Username is required to ${action} a session.`);
   };
 
   const createSession = useMutation({
     mutationFn: (session: Session) => {
-      if (!username)
-        throw new Error('Username is required to create a session.');
-      return validateApiResponse(Client.createSession(username, session));
+      ensureUsername('create');
+      return validateApiResponse(
+        Client.createSession(username!, session),
+        `create (${session.name})`,
+      );
     },
     onSuccess: invalidateSessions,
   });
 
   const updateSession = useMutation({
     mutationFn: (session: Session) => {
-      if (!username)
-        throw new Error('Username is required to update a session.');
-      return validateApiResponse(Client.updateSession(username, session));
+      ensureUsername('update');
+      return validateApiResponse(
+        Client.updateSession(username!, session),
+        `update (${session.name})`,
+      );
     },
     onSuccess: invalidateSessions,
   });
 
   const deleteSession = useMutation({
     mutationFn: (sessionName: string) => {
-      if (!username)
-        throw new Error('Username is required to delete a session.');
-      return validateApiResponse(Client.deleteSession(username, sessionName));
+      ensureUsername('delete');
+      return validateApiResponse(
+        Client.deleteSession(username!, sessionName),
+        `delete (${sessionName})`,
+      );
     },
     onSuccess: invalidateSessions,
   });

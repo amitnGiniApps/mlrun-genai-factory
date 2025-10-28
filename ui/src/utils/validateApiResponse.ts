@@ -12,26 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { create } from 'zustand';
+import { APIResponse } from '@shared/types';
 
-interface ChatState {
-  isTyping: boolean;
-  setIsTyping: (value: boolean) => void;
+export async function validateApiResponse(
+  apiCall: Promise<APIResponse>,
+  context: string,
+) {
+  const response = await apiCall;
 
-  canSend: boolean;
-  setCanSend: (value: boolean) => void;
+  if (!response.success) {
+    const message = response.error || `API request failed during ${context}`;
+    console.error(`[${context} Error]:`, message);
+    throw new Error(message);
+  }
 
-  isMessageError: boolean;
-  setIsMessageError: (isMessageError: boolean) => void;
+  return response.data;
 }
-
-export const useChatStore = create<ChatState>((set) => ({
-  isTyping: false,
-  setIsTyping: (value) => set({ isTyping: value }),
-
-  canSend: true,
-  setCanSend: (value) => set({ canSend: value }),
-
-  isMessageError: false,
-  setIsMessageError: (value) => set({ isMessageError: value }),
-}));
