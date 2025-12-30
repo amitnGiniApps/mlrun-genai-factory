@@ -8,4 +8,4 @@ pyyaml>=6.0.2
 click
 requests
 tabulate
-git+https://github.com/mlrun/genai-factory.git@chore/fix-controller
+git+https://github.com/amitnGiniApps/genai-factory.git@chore/fix-controller
